@@ -261,7 +261,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "count(max by (host_name, site) (metricshub_connector_status{state=\"ok\"} == 1)) / sum(present_over_time(metricshub_host_configured[1h]))",
+          "expr": "count(max by (host_name, site) (metricshub_connector_status{state=\"ok\"} == 1)) / sum(max by (host_name, site) (present_over_time(metricshub_host_configured[1h])))",
           "instant": true,
           "interval": "",
           "legendFormat": "Coverage",
