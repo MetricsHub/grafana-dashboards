@@ -2,7 +2,7 @@
   "__inputs": [
     {
       "name": "DS_PROMETHEUS",
-      "label": "Prometheus",
+      "label": "prometheus",
       "description": "",
       "type": "datasource",
       "pluginId": "prometheus",
@@ -15,7 +15,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "12.0.0+security-01"
+      "version": "12.0.2"
     },
     {
       "type": "panel",
@@ -135,7 +135,7 @@
         "content": "<h1 style=\"\">\r\n  <center>${host_name}</center>\r\n</h1>",
         "mode": "html"
       },
-      "pluginVersion": "12.0.0+security-01",
+      "pluginVersion": "12.0.2",
       "type": "text"
     },
     {
@@ -217,7 +217,7 @@
         "textMode": "value",
         "wideLayout": true
       },
-      "pluginVersion": "12.0.0+security-01",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
@@ -327,7 +327,7 @@
         "textMode": "value",
         "wideLayout": true
       },
-      "pluginVersion": "12.0.0+security-01",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
@@ -420,7 +420,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "12.0.0+security-01",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
@@ -429,7 +429,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "count(ALERTS_FOR_STATE{severity=\"critical\", site=~\"$site\", host_name=~\"$host_name\"})",
+          "expr": "count(ALERTS_FOR_STATE{severity=\"critical\", site=~\"$site\", host_name=~\"$host_name\", alertname=~\"MetricsHub-Hardware-.*\"})",
           "instant": true,
           "interval": "",
           "legendFormat": "Critical Alerts",
@@ -578,7 +578,7 @@
           }
         ]
       },
-      "pluginVersion": "12.0.0+security-01",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
@@ -777,7 +777,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "12.0.0+security-01",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
@@ -849,7 +849,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "12.0.0+security-01",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
@@ -919,7 +919,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "12.0.0+security-01",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
@@ -989,7 +989,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "12.0.0+security-01",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
@@ -998,7 +998,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "count(ALERTS_FOR_STATE{severity=\"warn\", site=~\"$site\", host_name=~\"$host_name\"})",
+          "expr": "count(ALERTS_FOR_STATE{severity=\"warning\", site=~\"$site\", host_name=~\"$host_name\", alertname=~\"MetricsHub-Hardware-.*\"})",
           "instant": true,
           "interval": "",
           "legendFormat": "Warning Alerts",
@@ -1396,7 +1396,7 @@
         "frameIndex": 0,
         "showHeader": true
       },
-      "pluginVersion": "12.0.0+security-01",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
@@ -1817,7 +1817,7 @@
         "textMode": "value",
         "wideLayout": true
       },
-      "pluginVersion": "12.0.0+security-01",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
@@ -1926,7 +1926,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.0.0+security-01",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
@@ -1998,7 +1998,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.0.0+security-01",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
@@ -2034,7 +2034,7 @@
         "content": "<h6 style=\"background-color:yyyyy\"><center>Today's Live Data</center></h6>",
         "mode": "html"
       },
-      "pluginVersion": "12.0.0+security-01",
+      "pluginVersion": "12.0.2",
       "type": "text"
     },
     {
@@ -2055,7 +2055,7 @@
         "content": "<h6 style=\"background-color:yyyy\"><center>Cumulative Consumption</center></h6>",
         "mode": "html"
       },
-      "pluginVersion": "12.0.0+security-01",
+      "pluginVersion": "12.0.2",
       "type": "text"
     },
     {
@@ -2076,7 +2076,7 @@
         "content": "<h6 style=\"background-color:DimGreen\"><center>Cumulative Cost</center></h6>",
         "mode": "html"
       },
-      "pluginVersion": "12.0.0+security-01",
+      "pluginVersion": "12.0.2",
       "type": "text"
     },
     {
@@ -2097,7 +2097,7 @@
         "content": "<h5 style=\"background-color:yyyyy\"><center>Cumulative CO₂</center></h5>",
         "mode": "html"
       },
-      "pluginVersion": "12.0.0+security-01",
+      "pluginVersion": "12.0.2",
       "type": "text"
     },
     {
@@ -2151,7 +2151,7 @@
         "textMode": "value",
         "wideLayout": true
       },
-      "pluginVersion": "12.0.0+security-01",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
@@ -2220,7 +2220,7 @@
         "textMode": "value",
         "wideLayout": true
       },
-      "pluginVersion": "12.0.0+security-01",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
@@ -2289,7 +2289,7 @@
         "textMode": "value",
         "wideLayout": true
       },
-      "pluginVersion": "12.0.0+security-01",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
@@ -2358,7 +2358,7 @@
         "textMode": "value",
         "wideLayout": true
       },
-      "pluginVersion": "12.0.0+security-01",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
@@ -2430,7 +2430,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "12.0.0+security-01",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
@@ -2499,7 +2499,7 @@
         "textMode": "value",
         "wideLayout": true
       },
-      "pluginVersion": "12.0.0+security-01",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
@@ -2568,7 +2568,7 @@
         "textMode": "value",
         "wideLayout": true
       },
-      "pluginVersion": "12.0.0+security-01",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
@@ -2637,7 +2637,7 @@
         "textMode": "value",
         "wideLayout": true
       },
-      "pluginVersion": "12.0.0+security-01",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
@@ -2706,7 +2706,7 @@
         "textMode": "value",
         "wideLayout": true
       },
-      "pluginVersion": "12.0.0+security-01",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
@@ -2793,7 +2793,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "12.0.0+security-01",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
@@ -2885,7 +2885,7 @@
         "textMode": "value",
         "wideLayout": true
       },
-      "pluginVersion": "12.0.0+security-01",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
@@ -2954,7 +2954,7 @@
         "textMode": "value",
         "wideLayout": true
       },
-      "pluginVersion": "12.0.0+security-01",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
@@ -3023,7 +3023,7 @@
         "textMode": "value",
         "wideLayout": true
       },
-      "pluginVersion": "12.0.0+security-01",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
@@ -3092,7 +3092,7 @@
         "textMode": "value",
         "wideLayout": true
       },
-      "pluginVersion": "12.0.0+security-01",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
@@ -3271,7 +3271,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "12.0.0+security-01",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
@@ -3398,7 +3398,7 @@
           "unit": "short"
         }
       },
-      "pluginVersion": "12.0.0+security-01",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
@@ -6704,6 +6704,6 @@
   "timezone": "",
   "title": "Hardware Host (MetricsHub)",
   "uid": "c2K8skm4k",
-  "version": 33,
+  "version": 4,
   "weekStart": ""
 }
