@@ -7,24 +7,10 @@
       "type": "datasource",
       "pluginId": "prometheus",
       "pluginName": "Prometheus"
-    },
-    {
-      "name": "DS_HTTP://M8B-LOCAL/",
-      "label": "http://m8b-local/",
-      "description": "",
-      "type": "datasource",
-      "pluginId": "prometheus",
-      "pluginName": "Prometheus"
     }
   ],
   "__elements": {},
   "__requires": [
-    {
-      "type": "panel",
-      "id": "bargauge",
-      "name": "Bar gauge",
-      "version": ""
-    },
     {
       "type": "panel",
       "id": "gauge",
@@ -35,7 +21,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "11.6.1"
+      "version": "12.0.0+security-01"
     },
     {
       "type": "panel",
@@ -204,7 +190,7 @@
         "showHeader": true,
         "sortBy": []
       },
-      "pluginVersion": "11.6.1",
+      "pluginVersion": "12.0.0+security-01",
       "targets": [
         {
           "datasource": {
@@ -260,19 +246,18 @@
             "includeByName": {},
             "indexByName": {
               "Time": 6,
-              "Value": 14,
+              "Value": 13,
               "__name__": 7,
               "agent_host_name": 8,
               "connector_id": 9,
-              "host_id": 10,
               "host_name": 2,
-              "host_type": 11,
-              "id": 12,
-              "joined_os": 1,
+              "host_type": 10,
+              "id": 11,
+              "joined_os": 0,
               "name": 3,
-              "os_type": 0,
+              "os_type": 1,
               "os_version": 5,
-              "site": 13,
+              "site": 12,
               "version": 4
             },
             "renameByName": {
@@ -310,6 +295,362 @@
       "fieldConfig": {
         "defaults": {
           "color": {
+            "fixedColor": "blue",
+            "mode": "fixed"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": true,
+            "inspect": false
+          },
+          "links": [],
+          "mappings": [],
+          "noValue": "None",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Severity"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 109
+              },
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "critical": {
+                        "color": "red",
+                        "index": 1,
+                        "text": "Critical"
+                      },
+                      "warning": {
+                        "color": "orange",
+                        "index": 0,
+                        "text": "Warning"
+                      }
+                    },
+                    "type": "value"
+                  }
+                ]
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "basic",
+                  "type": "color-background"
+                }
+              },
+              {
+                "id": "custom.align",
+                "value": "center"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Time"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "dateTimeAsLocal"
+              },
+              {
+                "id": "custom.width",
+                "value": 200
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Alert Name"
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "MetricsHub-System-CPU-High-Utilization-Warning": {
+                        "index": 1,
+                        "text": "CPU: High utilization"
+                      },
+                      "MetricsHub-System-Filesystem-Filesystem-High-Utilization-Warning": {
+                        "index": 0,
+                        "text": "Filesystem: High utilization"
+                      },
+                      "MetricsHub-System-Filesystem-High-Utilization-Critical": {
+                        "index": 2,
+                        "text": "Filesystem: Critically high utilization"
+                      },
+                      "MetricsHub-System-Filesystem-High-Utilization-Warning": {
+                        "index": 10,
+                        "text": "Filesystem: High utilization"
+                      },
+                      "MetricsHub-System-Memory-High-Utilization-Warning": {
+                        "index": 3,
+                        "text": "Memory: High utilization"
+                      },
+                      "MetricsHub-System-Network-Bandwidth-High-Critical": {
+                        "index": 5,
+                        "text": "Network: High bandwidth utilization"
+                      },
+                      "MetricsHub-System-Network-Bandwidth-High-Warning": {
+                        "index": 4,
+                        "text": "Network: High bandwidth utilization"
+                      },
+                      "MetricsHub-System-Network-Errors-Warning": {
+                        "index": 6,
+                        "text": "Network: High number of errors"
+                      },
+                      "MetricsHub-System-Network-Packets-Dropped-Warning": {
+                        "index": 7,
+                        "text": "Network: High number of packet drops"
+                      },
+                      "MetricsHub-System-Page-Fault-Rate-Critical": {
+                        "index": 9,
+                        "text": "Critical page fault rate"
+                      },
+                      "MetricsHub-System-Page-Fault-Rate-Warning": {
+                        "index": 8,
+                        "text": "Elevated page fault rate"
+                      }
+                    },
+                    "type": "value"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 12,
+        "x": 10,
+        "y": 1
+      },
+      "id": 138,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "enablePagination": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": false,
+            "displayName": "Time"
+          }
+        ]
+      },
+      "pluginVersion": "12.0.0+security-01",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "ALERTS_FOR_STATE{host_name=~\"$host_name\", alertname=~\"MetricsHub-System-.*\"}",
+          "format": "table",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "title": "System Alerts",
+      "transformations": [
+        {
+          "id": "filterFieldsByName",
+          "options": {
+            "include": {
+              "names": [
+                "Time",
+                "alertname",
+                "severity",
+                "system_device",
+                "__name__"
+              ]
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": false,
+              "Value": false,
+              "Value #A": true,
+              "__name__": true,
+              "agent_host_name": true,
+              "alertstatus": true,
+              "alertstatus_code": true,
+              "applies_to_os": true,
+              "array_name": true,
+              "bandwidth": true,
+              "battery_state": true,
+              "blade_name": true,
+              "chemistry": true,
+              "compiled_file_name": true,
+              "connector_id": true,
+              "description": true,
+              "device_id": true,
+              "device_type": true,
+              "display_name": true,
+              "driver_version": true,
+              "firmware_version": true,
+              "fqdn": true,
+              "host_id": true,
+              "host_name": true,
+              "host_type": true,
+              "hw_type": false,
+              "id": true,
+              "identifying_information": true,
+              "info": true,
+              "instance": true,
+              "job": true,
+              "local_device_name": true,
+              "location": true,
+              "model": true,
+              "name": false,
+              "os_type": true,
+              "parent": true,
+              "physical_address": true,
+              "power_supply_type": true,
+              "raid_level": true,
+              "robotic_type": true,
+              "sensor_location": true,
+              "serial_number": true,
+              "severity": false,
+              "site": true,
+              "state": true,
+              "type": true,
+              "vendor": true,
+              "wwn": true,
+              "zone": true
+            },
+            "includeByName": {},
+            "indexByName": {
+              "Time": 0,
+              "Value": 13,
+              "array_name": 20,
+              "battery_state": 23,
+              "device_id": 14,
+              "driver_version": 27,
+              "firmware_version": 28,
+              "host_id": 7,
+              "host_name": 8,
+              "host_type": 9,
+              "hw_type": 2,
+              "id": 5,
+              "info": 15,
+              "local_device_name": 21,
+              "location": 19,
+              "model": 16,
+              "name": 3,
+              "os_type": 10,
+              "parent": 6,
+              "power_supply_type": 26,
+              "protocol": 4,
+              "robotic_type": 25,
+              "sensor_location": 29,
+              "serial_number": 24,
+              "severity": 1,
+              "site": 11,
+              "state": 12,
+              "type": 17,
+              "vendor": 18,
+              "wwn": 22
+            },
+            "renameByName": {
+              "Time": "Time",
+              "alertname": "Alert Name",
+              "fqdn": "",
+              "hw_type": "Device Type",
+              "id": "",
+              "label": "Label",
+              "name": "Device Name",
+              "protocol": "Protocol",
+              "severity": "Severity",
+              "system_device": "Device"
+            }
+          }
+        },
+        {
+          "id": "sortBy",
+          "options": {
+            "fields": {},
+            "sort": [
+              {
+                "field": "Time"
+              }
+            ]
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "gridPos": {
+        "h": 3,
+        "w": 2,
+        "x": 22,
+        "y": 1
+      },
+      "id": 117,
+      "links": [
+        {
+          "title": "Hardware Sentry OpenTelemetry Collector",
+          "url": "https://www.sentrysoftware.com/products/hardware-sentry-opentelemetry-collector.html"
+        }
+      ],
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "<a href=\"https://metricshub.com/\" target=\"_blank\">\n  <div style=\"\n    display: block;\n    margin: 0 auto; \n    \n    background: transparent url(https://metricshub.com/images/logo-darkgrey.svg) no-repeat center center;\n    background-size: contain;\n    \n    width: 85px;   \n    height: 85px;\n    border-radius: 3px;\n  \">\n  </div>\n</a>",
+        "mode": "html"
+      },
+      "pluginVersion": "12.0.0+security-01",
+      "type": "text"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
             "mode": "thresholds"
           },
           "fieldMinMax": false,
@@ -328,8 +669,8 @@
       "gridPos": {
         "h": 3,
         "w": 2,
-        "x": 10,
-        "y": 1
+        "x": 0,
+        "y": 4
       },
       "id": 91,
       "options": {
@@ -350,7 +691,7 @@
         "textMode": "value",
         "wideLayout": true
       },
-      "pluginVersion": "11.6.1",
+      "pluginVersion": "12.0.0+security-01",
       "targets": [
         {
           "datasource": {
@@ -398,8 +739,8 @@
       "gridPos": {
         "h": 3,
         "w": 2,
-        "x": 12,
-        "y": 1
+        "x": 2,
+        "y": 4
       },
       "id": 93,
       "options": {
@@ -420,7 +761,7 @@
         "textMode": "value",
         "wideLayout": true
       },
-      "pluginVersion": "11.6.1",
+      "pluginVersion": "12.0.0+security-01",
       "targets": [
         {
           "datasource": {
@@ -467,8 +808,8 @@
       "gridPos": {
         "h": 3,
         "w": 2,
-        "x": 14,
-        "y": 1
+        "x": 4,
+        "y": 4
       },
       "id": 100,
       "options": {
@@ -488,7 +829,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.6.1",
+      "pluginVersion": "12.0.0+security-01",
       "targets": [
         {
           "datasource": {
@@ -543,8 +884,8 @@
       "gridPos": {
         "h": 3,
         "w": 2,
-        "x": 16,
-        "y": 1
+        "x": 6,
+        "y": 4
       },
       "id": 92,
       "options": {
@@ -565,7 +906,7 @@
         "textMode": "value",
         "wideLayout": true
       },
-      "pluginVersion": "11.6.1",
+      "pluginVersion": "12.0.0+security-01",
       "targets": [
         {
           "datasource": {
@@ -633,8 +974,8 @@
       "gridPos": {
         "h": 3,
         "w": 2,
-        "x": 18,
-        "y": 1
+        "x": 8,
+        "y": 4
       },
       "id": 86,
       "options": {
@@ -655,7 +996,7 @@
         "textMode": "value",
         "wideLayout": false
       },
-      "pluginVersion": "11.6.1",
+      "pluginVersion": "12.0.0+security-01",
       "targets": [
         {
           "datasource": {
@@ -666,9 +1007,9 @@
           "exemplar": false,
           "expr": "metricshub_connector_status{host_name=\"$host_name\", connector_id=~\"Linux|Windows\", state=\"ok\"}",
           "format": "time_series",
-          "instant": true,
+          "instant": false,
           "legendFormat": "Connector",
-          "range": false,
+          "range": true,
           "refId": "A"
         }
       ],
@@ -678,7 +1019,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_HTTP://M8B-LOCAL/}"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "",
       "fieldConfig": {
@@ -702,8 +1043,8 @@
       "gridPos": {
         "h": 3,
         "w": 2,
-        "x": 20,
-        "y": 1
+        "x": 22,
+        "y": 4
       },
       "id": 128,
       "options": {
@@ -723,48 +1064,21 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.6.1",
+      "pluginVersion": "12.0.0+security-01",
       "targets": [
         {
-          "editorMode": "code",
-          "expr": "",
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "A",
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_HTTP://M8B-LOCAL/}"
-          }
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "expr": "",
+          "instant": false,
+          "range": true,
+          "refId": "A"
         }
       ],
       "title": "Dashboard",
       "type": "stat"
-    },
-    {
-      "gridPos": {
-        "h": 3,
-        "w": 2,
-        "x": 22,
-        "y": 1
-      },
-      "id": 117,
-      "links": [
-        {
-          "title": "Hardware Sentry OpenTelemetry Collector",
-          "url": "https://www.sentrysoftware.com/products/hardware-sentry-opentelemetry-collector.html"
-        }
-      ],
-      "options": {
-        "code": {
-          "language": "plaintext",
-          "showLineNumbers": false,
-          "showMiniMap": false
-        },
-        "content": "<a href=\"https://metricshub.com/\" target=\"_blank\">\n  <div style=\"\n    display: block;\n    margin: 0 auto; \n    \n    background: transparent url(https://metricshub.com/images/logo-darkgrey.svg) no-repeat center center;\n    background-size: contain;\n    \n    width: 85px;   \n    height: 85px;\n    border-radius: 3px;\n  \">\n  </div>\n</a>",
-        "mode": "html"
-      },
-      "pluginVersion": "11.6.1",
-      "type": "text"
     },
     {
       "collapsed": false,
@@ -772,7 +1086,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 4
+        "y": 7
       },
       "id": 116,
       "panels": [],
@@ -996,6 +1310,10 @@
                     }
                   ]
                 }
+              },
+              {
+                "id": "custom.width",
+                "value": 169
               }
             ]
           },
@@ -1065,6 +1383,10 @@
                   "fixedColor": "transparent",
                   "mode": "fixed"
                 }
+              },
+              {
+                "id": "custom.width",
+                "value": 155
               }
             ]
           },
@@ -1141,6 +1463,10 @@
               {
                 "id": "custom.align",
                 "value": "center"
+              },
+              {
+                "id": "custom.width",
+                "value": 175
               }
             ]
           }
@@ -1150,7 +1476,7 @@
         "h": 5,
         "w": 24,
         "x": 0,
-        "y": 5
+        "y": 8
       },
       "id": 114,
       "options": {
@@ -1164,9 +1490,10 @@
           "show": false
         },
         "frameIndex": 0,
-        "showHeader": true
+        "showHeader": true,
+        "sortBy": []
       },
-      "pluginVersion": "11.6.1",
+      "pluginVersion": "12.0.0+security-01",
       "targets": [
         {
           "datasource": {
@@ -1249,7 +1576,7 @@
           "editorMode": "code",
           "exemplar": false,
           "expr": "metricshub_host_up{host_name=\"$host_name\"}",
-          "hide": false,
+          "hide": true,
           "instant": false,
           "legendFormat": "{{protocol}}",
           "range": true,
@@ -1528,7 +1855,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 10
+        "y": 13
       },
       "id": 118,
       "panels": [],
@@ -1550,6 +1877,7 @@
             "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
+            "axisGridShow": false,
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -1579,29 +1907,7 @@
               "mode": "off"
             }
           },
-          "mappings": [
-            {
-              "options": {
-                "io_wait": {
-                  "index": 0,
-                  "text": "IO Wait"
-                },
-                "nice": {
-                  "index": 3,
-                  "text": "Nice"
-                },
-                "system": {
-                  "index": 1,
-                  "text": "System"
-                },
-                "user": {
-                  "index": 2,
-                  "text": "User"
-                }
-              },
-              "type": "value"
-            }
-          ],
+          "mappings": [],
           "max": 1,
           "min": 0,
           "thresholds": {
@@ -1611,8 +1917,12 @@
                 "color": "green"
               },
               {
-                "color": "red",
+                "color": "#EAB839",
                 "value": 0.8
+              },
+              {
+                "color": "red",
+                "value": 0.95
               }
             ]
           },
@@ -1624,7 +1934,7 @@
         "h": 6,
         "w": 6,
         "x": 0,
-        "y": 11
+        "y": 14
       },
       "id": 119,
       "interval": "5m",
@@ -1642,7 +1952,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.6.1",
+      "pluginVersion": "12.0.0+security-01",
       "targets": [
         {
           "datasource": {
@@ -1651,14 +1961,14 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "max by (host_name) (1 - rate(system_cpu_time_seconds_total{host_name=\"$host_name\", system_cpu_state=\"idle\"}[$__rate_interval]))",
+          "expr": "max(1 - sum by (name) (delta(system_cpu_time_seconds_total{host_name=\"$host_name\", system_cpu_state=\"idle\"}[$__rate_interval])) / sum by (name) (delta(system_cpu_time_seconds_total{host_name=\"$host_name\"}[$__rate_interval])))",
           "format": "time_series",
           "hide": false,
           "instant": false,
           "interval": "",
           "legendFormat": "Max Core CPU Utilization",
           "range": true,
-          "refId": "B"
+          "refId": "A"
         }
       ],
       "title": "Max CPU Utilization",
@@ -1679,6 +1989,7 @@
             "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
+            "axisGridShow": false,
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -1719,11 +2030,11 @@
               },
               {
                 "color": "#EAB839",
-                "value": 0.6
+                "value": 0.75
               },
               {
                 "color": "red",
-                "value": 0.8
+                "value": 0.9
               }
             ]
           },
@@ -1735,12 +2046,14 @@
         "h": 6,
         "w": 6,
         "x": 6,
-        "y": 11
+        "y": 14
       },
       "id": 120,
       "options": {
         "legend": {
-          "calcs": [],
+          "calcs": [
+            "last"
+          ],
           "displayMode": "list",
           "placement": "right",
           "showLegend": false
@@ -1752,7 +2065,7 @@
           "sort": "desc"
         }
       },
-      "pluginVersion": "11.6.1",
+      "pluginVersion": "12.0.0+security-01",
       "targets": [
         {
           "datasource": {
@@ -1797,6 +2110,7 @@
             "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
+            "axisGridShow": false,
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -1858,6 +2172,10 @@
                 "color": "green"
               },
               {
+                "color": "#EAB839",
+                "value": 0.6
+              },
+              {
                 "color": "red",
                 "value": 0.8
               }
@@ -1871,7 +2189,7 @@
         "h": 6,
         "w": 6,
         "x": 12,
-        "y": 11
+        "y": 14
       },
       "id": 121,
       "interval": "5m",
@@ -1889,7 +2207,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.6.1",
+      "pluginVersion": "12.0.0+security-01",
       "targets": [
         {
           "datasource": {
@@ -1920,12 +2238,13 @@
         "defaults": {
           "color": {
             "fixedColor": "red",
-            "mode": "palette-classic"
+            "mode": "thresholds"
           },
           "custom": {
             "axisBorderShow": false,
             "axisCenteredZero": true,
             "axisColorMode": "text",
+            "axisGridShow": false,
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -1939,7 +2258,7 @@
               "viz": false
             },
             "insertNulls": false,
-            "lineInterpolation": "stepBefore",
+            "lineInterpolation": "linear",
             "lineWidth": 2,
             "pointSize": 5,
             "scaleDistribution": {
@@ -1957,61 +2276,36 @@
           },
           "fieldMinMax": false,
           "mappings": [],
+          "max": 1,
+          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
                 "color": "green"
-              }
-            ]
-          },
-          "unit": "binBps"
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byFrameRefID",
-              "options": "B"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "purple",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byFrameRefID",
-              "options": "A"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "blue",
-                  "mode": "fixed"
-                }
               },
               {
-                "id": "custom.transform",
-                "value": "negative-Y"
+                "color": "#EAB839",
+                "value": 0.5
+              },
+              {
+                "color": "red",
+                "value": 0.8
               }
             ]
-          }
-        ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
       },
       "gridPos": {
         "h": 6,
         "w": 6,
         "x": 18,
-        "y": 11
+        "y": 14
       },
-      "id": 122,
-      "interval": "5m",
+      "id": 135,
+      "interval": "20m",
       "options": {
         "legend": {
           "calcs": [
@@ -2033,7 +2327,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.6.1",
+      "pluginVersion": "12.0.0+security-01",
       "targets": [
         {
           "datasource": {
@@ -2041,28 +2335,15 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "sum(rate(system_network_io_bytes_total{host_name=\"$host_name\", network_io_direction=\"transmit\"}[$__rate_interval]))",
+          "expr": "max(max by (network_interface_name) (rate(system_network_io_bytes_total{host_name=\"$host_name\"}[$__rate_interval])\r\n) / max by (network_interface_name) (system_network_bandwidth_limit_bytes{host_name=\"$host_name\"}))",
           "hide": false,
           "instant": false,
-          "legendFormat": "Received",
+          "legendFormat": "Max Network Utilization",
           "range": true,
           "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "sum(rate(system_network_io_bytes_total{host_name=\"$host_name\", network_io_direction=\"receive\"}[$__rate_interval]))",
-          "hide": false,
-          "instant": false,
-          "legendFormat": "Transmitted",
-          "range": true,
-          "refId": "B"
         }
       ],
-      "title": "Network Total Traffic",
+      "title": "Max Network Utilization",
       "type": "timeseries"
     },
     {
@@ -2071,7 +2352,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 17
+        "y": 20
       },
       "id": 49,
       "panels": [],
@@ -2183,20 +2464,24 @@
         ]
       },
       "gridPos": {
-        "h": 7,
+        "h": 8,
         "w": 5,
         "x": 0,
-        "y": 18
+        "y": 21
       },
       "id": 8,
       "options": {
         "displayLabels": [
-          "name"
+          "name",
+          "percent"
         ],
         "legend": {
-          "displayMode": "list",
+          "displayMode": "table",
           "placement": "bottom",
-          "showLegend": true
+          "showLegend": false,
+          "values": [
+            "percent"
+          ]
         },
         "pieType": "donut",
         "reduceOptions": {
@@ -2213,7 +2498,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.6.1",
+      "pluginVersion": "12.0.0+security-01",
       "targets": [
         {
           "datasource": {
@@ -2270,10 +2555,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 7,
+        "h": 8,
         "w": 8,
         "x": 5,
-        "y": 18
+        "y": 21
       },
       "id": 6,
       "options": {
@@ -2291,7 +2576,7 @@
         "showThresholdMarkers": true,
         "sizing": "auto"
       },
-      "pluginVersion": "11.6.1",
+      "pluginVersion": "12.0.0+security-01",
       "targets": [
         {
           "datasource": {
@@ -2451,10 +2736,10 @@
         ]
       },
       "gridPos": {
-        "h": 7,
+        "h": 8,
         "w": 11,
         "x": 13,
-        "y": 18
+        "y": 21
       },
       "id": 110,
       "interval": "5m",
@@ -2472,7 +2757,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.6.1",
+      "pluginVersion": "12.0.0+security-01",
       "targets": [
         {
           "datasource": {
@@ -2515,7 +2800,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 25
+        "y": 29
       },
       "id": 42,
       "panels": [],
@@ -2622,10 +2907,10 @@
         ]
       },
       "gridPos": {
-        "h": 7,
-        "w": 8,
+        "h": 8,
+        "w": 5,
         "x": 0,
-        "y": 26
+        "y": 30
       },
       "id": 25,
       "options": {
@@ -2656,7 +2941,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.6.1",
+      "pluginVersion": "12.0.0+security-01",
       "targets": [
         {
           "datasource": {
@@ -2690,6 +2975,7 @@
             "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
+            "axisGridShow": false,
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -2730,11 +3016,11 @@
               },
               {
                 "color": "#EAB839",
-                "value": 0.6
+                "value": 0.75
               },
               {
                 "color": "red",
-                "value": 0.8
+                "value": 0.9
               }
             ]
           },
@@ -2743,10 +3029,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 7,
-        "w": 12,
-        "x": 8,
-        "y": 26
+        "h": 8,
+        "w": 8,
+        "x": 5,
+        "y": 30
       },
       "id": 17,
       "options": {
@@ -2759,11 +3045,11 @@
         "tooltip": {
           "hideZeros": false,
           "maxHeight": 600,
-          "mode": "single",
+          "mode": "multi",
           "sort": "desc"
         }
       },
-      "pluginVersion": "11.6.1",
+      "pluginVersion": "12.0.0+security-01",
       "targets": [
         {
           "datasource": {
@@ -2777,20 +3063,7 @@
           "refId": "A"
         }
       ],
-      "title": "Memory Usage",
-      "transformations": [
-        {
-          "id": "organize",
-          "options": {
-            "excludeByName": {},
-            "includeByName": {},
-            "indexByName": {},
-            "renameByName": {
-              "{__name__=\"system_memory_utilization_ratio\", agent_host_name=\"mk-win.internal.sentrysoftware.net\", connector_id=\"Linux\", host_id=\"mk-deb2\", host_name=\"mk-deb2.internal.sentrysoftware.net\", host_type=\"compute\", id=\"memory_usage\", os_type=\"linux\", site=\"Paris\", system_memory_limit=\"2063106048\", system_memory_usage=\"used\"}": "Used memory"
-            }
-          }
-        }
-      ],
+      "title": "Memory Utilization (Cumulated)",
       "type": "timeseries"
     },
     {
@@ -2801,12 +3074,45 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "fixedColor": "#808080",
-            "mode": "fixed"
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisGridShow": false,
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "smooth",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "log": 2,
+              "type": "log"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
           },
           "mappings": [],
           "min": 0,
-          "noValue": "N/A",
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -2815,30 +3121,193 @@
               }
             ]
           },
-          "unit": "bytes"
+          "unit": "sishort"
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Minor"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "super-light-orange",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Major"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
-        "h": 7,
-        "w": 4,
-        "x": 20,
-        "y": 26
+        "h": 4,
+        "w": 6,
+        "x": 13,
+        "y": 30
       },
-      "id": 44,
+      "id": 134,
+      "interval": "5m",
       "options": {
-        "displayMode": "lcd",
         "legend": {
           "calcs": [],
           "displayMode": "list",
           "placement": "bottom",
-          "showLegend": false
+          "showLegend": true
         },
-        "maxVizHeight": 300,
-        "minVizHeight": 16,
-        "minVizWidth": 8,
-        "namePlacement": "auto",
-        "orientation": "vertical",
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.0.0+security-01",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "expr": "rate(system_paging_faults_total{host_name=\"$host_name\", system_paging_type=\"minor\"}[$__rate_interval])",
+          "legendFormat": "Minor",
+          "range": true,
+          "refId": "Minor"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "expr": "rate(system_paging_faults_total{host_name=\"$host_name\", system_paging_type=\"major\"}[$__rate_interval])",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "Major",
+          "range": true,
+          "refId": "Major"
+        }
+      ],
+      "title": "Memory Faults",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": [],
+          "unit": "bytes"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "free"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "green",
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "displayName",
+                "value": "Free"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "used"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "red",
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "displayName",
+                "value": "Used"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "cached"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "light-blue",
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "displayName",
+                "value": "Cached"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 5,
+        "x": 19,
+        "y": 30
+      },
+      "id": 131,
+      "options": {
+        "displayLabels": [
+          "name",
+          "value"
+        ],
+        "legend": {
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true,
+          "values": [
+            "percent"
+          ]
+        },
+        "pieType": "donut",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -2846,11 +3315,14 @@
           "fields": "",
           "values": false
         },
-        "showUnfilled": true,
-        "sizing": "auto",
-        "valueMode": "text"
+        "tooltip": {
+          "hideZeros": false,
+          "maxHeight": 600,
+          "mode": "single",
+          "sort": "none"
+        }
       },
-      "pluginVersion": "11.6.1",
+      "pluginVersion": "12.0.0+security-01",
       "targets": [
         {
           "datasource": {
@@ -2859,16 +3331,170 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "system_memory_usage_bytes{host_name=\"$host_name\", system_memory_state=~\"cached|buffers\"}",
-          "format": "time_series",
+          "expr": "system_paging_usage_bytes{host_name=\"$host_name\"}",
           "instant": true,
-          "legendFormat": "{{system_memory_state}}",
+          "legendFormat": "{{system_paging_state}}",
           "range": false,
           "refId": "A"
         }
       ],
-      "title": "Cache",
-      "type": "bargauge"
+      "title": "Paging Utilization",
+      "type": "piechart"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "red",
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": true,
+            "axisColorMode": "text",
+            "axisGridShow": false,
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 50,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "stepBefore",
+            "lineWidth": 2,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "fieldMinMax": false,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              }
+            ]
+          },
+          "unit": "sishort"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "B"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "purple",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "A"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "blue",
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "custom.transform",
+                "value": "negative-Y"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 13,
+        "y": 34
+      },
+      "id": 133,
+      "interval": "5m",
+      "options": {
+        "legend": {
+          "calcs": [
+            "lastNotNull",
+            "min",
+            "max",
+            "mean"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": false,
+          "sortBy": "Name",
+          "sortDesc": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "maxHeight": 600,
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.0.0+security-01",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "expr": "rate(system_paging_operations_total{host_name=\"$host_name\", system_paging_direction=\"out\"}[$__rate_interval])",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "Out",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "expr": "rate(system_paging_operations_total{host_name=\"$host_name\", system_paging_direction=\"in\"}[$__rate_interval])",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "In",
+          "range": true,
+          "refId": "B"
+        }
+      ],
+      "title": "Paging Activity",
+      "type": "timeseries"
     },
     {
       "collapsed": false,
@@ -2876,7 +3502,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 33
+        "y": 38
       },
       "id": 33,
       "panels": [],
@@ -3100,7 +3726,7 @@
         "h": 10,
         "w": 24,
         "x": 0,
-        "y": 34
+        "y": 39
       },
       "id": 130,
       "options": {
@@ -3124,7 +3750,7 @@
           }
         ]
       },
-      "pluginVersion": "11.6.1",
+      "pluginVersion": "12.0.0+security-01",
       "targets": [
         {
           "datasource": {
@@ -3335,6 +3961,7 @@
           "id": "organize",
           "options": {
             "excludeByName": {
+              "Capacity": false,
               "FreeAndUsedCapacity": true,
               "Time": true,
               "Time 1": true,
@@ -3378,6 +4005,8 @@
               "host_type 3": true,
               "id 1": true,
               "id 2": true,
+              "name 1": true,
+              "name 2": true,
               "os_type": true,
               "os_type 1": true,
               "os_type 2": true,
@@ -3490,7 +4119,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 44
+        "y": 49
       },
       "id": 37,
       "panels": [],
@@ -3594,7 +4223,7 @@
         "h": 8,
         "w": 20,
         "x": 0,
-        "y": 45
+        "y": 50
       },
       "id": 80,
       "interval": "5m",
@@ -3619,7 +4248,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.6.1",
+      "pluginVersion": "12.0.0+security-01",
       "targets": [
         {
           "datasource": {
@@ -3630,7 +4259,7 @@
           "expr": "sum(rate(system_network_io_bytes_total{host_name=\"$host_name\", network_io_direction=\"transmit\"}[$__rate_interval]))",
           "hide": false,
           "instant": false,
-          "legendFormat": "Received",
+          "legendFormat": "Transmitted",
           "range": true,
           "refId": "A"
         },
@@ -3643,7 +4272,7 @@
           "expr": "sum(rate(system_network_io_bytes_total{host_name=\"$host_name\", network_io_direction=\"receive\"}[$__rate_interval]))",
           "hide": false,
           "instant": false,
-          "legendFormat": "Transmitted",
+          "legendFormat": "Received",
           "range": true,
           "refId": "B"
         }
@@ -3687,7 +4316,7 @@
         "h": 4,
         "w": 2,
         "x": 20,
-        "y": 45
+        "y": 50
       },
       "id": 124,
       "options": {
@@ -3708,7 +4337,7 @@
         "textMode": "value",
         "wideLayout": true
       },
-      "pluginVersion": "11.6.1",
+      "pluginVersion": "12.0.0+security-01",
       "targets": [
         {
           "datasource": {
@@ -3765,7 +4394,7 @@
         "h": 4,
         "w": 2,
         "x": 22,
-        "y": 45
+        "y": 50
       },
       "id": 126,
       "options": {
@@ -3786,7 +4415,7 @@
         "textMode": "value",
         "wideLayout": true
       },
-      "pluginVersion": "11.6.1",
+      "pluginVersion": "12.0.0+security-01",
       "targets": [
         {
           "datasource": {
@@ -3841,7 +4470,7 @@
         "h": 4,
         "w": 2,
         "x": 20,
-        "y": 49
+        "y": 54
       },
       "id": 125,
       "options": {
@@ -3862,7 +4491,7 @@
         "textMode": "value",
         "wideLayout": true
       },
-      "pluginVersion": "11.6.1",
+      "pluginVersion": "12.0.0+security-01",
       "targets": [
         {
           "datasource": {
@@ -3919,7 +4548,7 @@
         "h": 4,
         "w": 2,
         "x": 22,
-        "y": 49
+        "y": 54
       },
       "id": 127,
       "options": {
@@ -3940,7 +4569,7 @@
         "textMode": "value",
         "wideLayout": true
       },
-      "pluginVersion": "11.6.1",
+      "pluginVersion": "12.0.0+security-01",
       "targets": [
         {
           "datasource": {
@@ -3965,7 +4594,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 53
+        "y": 58
       },
       "id": 111,
       "panels": [],
@@ -4075,7 +4704,7 @@
         "h": 6,
         "w": 24,
         "x": 0,
-        "y": 54
+        "y": 59
       },
       "id": 106,
       "interval": "5m",
@@ -4098,7 +4727,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.6.0",
+      "pluginVersion": "12.0.0+security-01",
       "repeat": "network_id",
       "repeatDirection": "h",
       "targets": [
@@ -4109,10 +4738,10 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "rate(system_network_io_bytes_total{host_name=\"$host_name\", network_io_direction=\"transmit\", id=\"$network_id\"}[$__rate_interval])",
+          "expr": "rate(system_network_io_bytes_total{host_name=\"$host_name\", network_io_direction=\"transmit\", id=~\"$network_id\"}[$__rate_interval])",
           "format": "time_series",
           "instant": false,
-          "legendFormat": "Received",
+          "legendFormat": "Transmitted",
           "range": true,
           "refId": "A"
         },
@@ -4122,10 +4751,10 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "rate(system_network_io_bytes_total{host_name=\"$host_name\", network_io_direction=\"receive\", id=\"$network_id\"}[$__rate_interval])",
+          "expr": "rate(system_network_io_bytes_total{host_name=\"$host_name\", network_io_direction=\"receive\", id=~\"$network_id\"}[$__rate_interval])",
           "hide": false,
           "instant": false,
-          "legendFormat": "Transmitted",
+          "legendFormat": "Received",
           "range": true,
           "refId": "B"
         }
@@ -4139,7 +4768,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 60
+        "y": 65
       },
       "id": 112,
       "panels": [],
@@ -4249,7 +4878,7 @@
         "h": 5,
         "w": 24,
         "x": 0,
-        "y": 61
+        "y": 66
       },
       "id": 107,
       "interval": "5m",
@@ -4272,7 +4901,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.6.0",
+      "pluginVersion": "12.0.0+security-01",
       "repeat": "physical_disk_system_device",
       "repeatDirection": "h",
       "targets": [
@@ -4282,7 +4911,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "sum by (disk_io_direction) (rate(system_disk_io_bytes_total{host_name=\"$host_name\", system_device=\"$physical_disk_system_device\"}[$__rate_interval]))",
+          "expr": "sum by (disk_io_direction) (rate(system_disk_io_bytes_total{host_name=\"$host_name\", system_device=~\"$physical_disk_system_device\"}[$__rate_interval]))",
           "hide": false,
           "instant": false,
           "legendFormat": "{{disk_io_direction}}",
@@ -4294,247 +4923,250 @@
       "type": "timeseries"
     },
     {
-      "collapsed": false,
+      "collapsed": true,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 66
+        "y": 71
       },
       "id": 29,
-      "panels": [],
-      "title": "Agent Information",
-      "type": "row"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "custom": {
-            "align": "center",
-            "cellOptions": {
-              "type": "auto"
-            },
-            "filterable": false,
-            "inspect": false
-          },
-          "mappings": [
-            {
-              "options": {
-                "linux": {
-                  "index": 1,
-                  "text": "https://upload.wikimedia.org/wikipedia/commons/3/35/Tux.svg"
-                },
-                "windows": {
-                  "index": 0,
-                  "text": "https://upload.wikimedia.org/wikipedia/commons/e/e2/Windows_logo_and_wordmark_-_2021.svg"
-                }
-              },
-              "type": "value"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green"
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "OS"
-            },
-            "properties": [
-              {
-                "id": "custom.cellOptions",
-                "value": {
-                  "type": "image"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Version"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 100
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Build Number"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 120
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "CC Version"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 100
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 24,
-        "x": 0,
-        "y": 67
-      },
-      "id": 35,
-      "options": {
-        "cellHeight": "sm",
-        "footer": {
-          "countRows": false,
-          "fields": "",
-          "reducer": [
-            "sum"
-          ],
-          "show": false
-        },
-        "showHeader": true
-      },
-      "pluginVersion": "11.6.0",
-      "repeat": "agent",
-      "repeatDirection": "h",
-      "targets": [
+      "panels": [
         {
           "datasource": {
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "timestamp(metricshub_agent_info{agent_host_name=\"$agent\"})",
-          "format": "table",
-          "instant": true,
-          "legendFormat": "__auto",
-          "range": false,
-          "refId": "A"
-        }
-      ],
-      "transformations": [
-        {
-          "id": "calculateField",
-          "options": {
-            "alias": "Last Collect",
-            "binary": {
-              "left": {
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {
+                "align": "center",
+                "cellOptions": {
+                  "type": "auto"
+                },
+                "filterable": false,
+                "inspect": false
+              },
+              "mappings": [
+                {
+                  "options": {
+                    "linux": {
+                      "index": 1,
+                      "text": "https://upload.wikimedia.org/wikipedia/commons/3/35/Tux.svg"
+                    },
+                    "windows": {
+                      "index": 0,
+                      "text": "https://upload.wikimedia.org/wikipedia/commons/e/e2/Windows_logo_and_wordmark_-_2021.svg"
+                    }
+                  },
+                  "type": "value"
+                }
+              ],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": [
+              {
                 "matcher": {
                   "id": "byName",
-                  "options": "Value"
-                }
+                  "options": "OS"
+                },
+                "properties": [
+                  {
+                    "id": "custom.cellOptions",
+                    "value": {
+                      "type": "image"
+                    }
+                  }
+                ]
               },
-              "operator": "*",
-              "right": {
-                "fixed": "1000"
-              }
-            },
-            "mode": "binary",
-            "reduce": {
-              "include": [
-                "Value"
-              ],
-              "reducer": "stdDev"
-            }
-          }
-        },
-        {
-          "id": "convertFieldType",
-          "options": {
-            "conversions": [
               {
-                "dateFormat": "",
-                "destinationType": "time",
-                "targetField": "Last Collect"
+                "matcher": {
+                  "id": "byName",
+                  "options": "Version"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 100
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Build Number"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 120
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "CC Version"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 100
+                  }
+                ]
               }
-            ],
-            "fields": {}
-          }
-        },
-        {
-          "id": "formatTime",
+            ]
+          },
+          "gridPos": {
+            "h": 3,
+            "w": 24,
+            "x": 0,
+            "y": 72
+          },
+          "id": 35,
           "options": {
-            "outputFormat": "MM-DD HH:mm:ss",
-            "timeField": "Last Collect",
-            "useTimezone": true
-          }
-        },
-        {
-          "id": "organize",
-          "options": {
-            "excludeByName": {
-              "Time": true,
-              "Value": true,
-              "__name__": true,
-              "host_id": true,
-              "host_name": true,
-              "host_type": true,
-              "job": true,
-              "name": true
+            "cellHeight": "sm",
+            "footer": {
+              "countRows": false,
+              "fields": "",
+              "reducer": [
+                "sum"
+              ],
+              "show": false
             },
-            "includeByName": {},
-            "indexByName": {
-              "Last Collect": 14,
-              "Time": 7,
-              "Value": 9,
-              "agent_host_name": 1,
-              "build_date": 3,
-              "build_number": 4,
-              "cc_version": 5,
-              "host_id": 10,
-              "host_name": 11,
-              "host_type": 12,
-              "job": 8,
-              "name": 6,
-              "os_type": 13,
-              "service_name": 0,
-              "version": 2
-            },
-            "renameByName": {
-              "Last": "lasy",
-              "agent_host_name": "Agent Host Name",
-              "build_date": "Build Date",
-              "build_number": "Build Number",
-              "cc_version": "CC Version",
-              "os_type": "OS",
-              "service_name": "Service Name",
-              "version": "Version"
+            "showHeader": true
+          },
+          "pluginVersion": "12.0.0+security-01",
+          "repeat": "agent",
+          "repeatDirection": "h",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "timestamp(metricshub_agent_info{agent_host_name=\"$agent\"})",
+              "format": "table",
+              "instant": true,
+              "legendFormat": "__auto",
+              "range": false,
+              "refId": "A"
             }
-          }
+          ],
+          "title": "",
+          "transformations": [
+            {
+              "id": "calculateField",
+              "options": {
+                "alias": "Last Collect",
+                "binary": {
+                  "left": {
+                    "matcher": {
+                      "id": "byName",
+                      "options": "Value"
+                    }
+                  },
+                  "operator": "*",
+                  "right": {
+                    "fixed": "1000"
+                  }
+                },
+                "mode": "binary",
+                "reduce": {
+                  "include": [
+                    "Value"
+                  ],
+                  "reducer": "stdDev"
+                }
+              }
+            },
+            {
+              "id": "convertFieldType",
+              "options": {
+                "conversions": [
+                  {
+                    "dateFormat": "",
+                    "destinationType": "time",
+                    "targetField": "Last Collect"
+                  }
+                ],
+                "fields": {}
+              }
+            },
+            {
+              "id": "formatTime",
+              "options": {
+                "outputFormat": "MM-DD HH:mm:ss",
+                "timeField": "Last Collect",
+                "useTimezone": true
+              }
+            },
+            {
+              "id": "organize",
+              "options": {
+                "excludeByName": {
+                  "Time": true,
+                  "Value": true,
+                  "__name__": true,
+                  "host_id": true,
+                  "host_name": true,
+                  "host_type": true,
+                  "job": true,
+                  "name": true,
+                  "site": true
+                },
+                "includeByName": {},
+                "indexByName": {
+                  "Last Collect": 7,
+                  "Time": 9,
+                  "Value": 11,
+                  "agent_host_name": 1,
+                  "build_date": 4,
+                  "build_number": 5,
+                  "cc_version": 6,
+                  "host_name": 12,
+                  "host_type": 13,
+                  "job": 10,
+                  "name": 8,
+                  "os_type": 2,
+                  "service_name": 0,
+                  "site": 14,
+                  "version": 3
+                },
+                "renameByName": {
+                  "Last": "lasy",
+                  "agent_host_name": "Agent Host Name",
+                  "build_date": "Build Date",
+                  "build_number": "Build Number",
+                  "cc_version": "CC Version",
+                  "os_type": "OS",
+                  "service_name": "Service Name",
+                  "version": "Version"
+                }
+              }
+            }
+          ],
+          "type": "table"
         }
       ],
-      "type": "table"
+      "title": "MetricsHub Agent Information",
+      "type": "row"
     }
   ],
   "refresh": "30s",
@@ -4549,7 +5181,11 @@
       {
         "allowCustomValue": false,
         "current": {},
-        "definition": "label_values(system_uptime_seconds,connector_id)",
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_PROMETHEUS}"
+        },
+        "definition": "label_values(system_uptime_seconds,os_type)",
         "includeAll": true,
         "label": "System",
         "multi": true,
@@ -4557,7 +5193,7 @@
         "options": [],
         "query": {
           "qryType": 1,
-          "query": "label_values(system_uptime_seconds,connector_id)",
+          "query": "label_values(system_uptime_seconds,os_type)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
@@ -4618,7 +5254,7 @@
           "type": "prometheus",
           "uid": "${DS_PROMETHEUS}"
         },
-        "definition": "label_values({connector_id=~\"$system\"},host_name)",
+        "definition": "label_values(system_uptime_seconds{os_type=~\"$system\"},host_name)",
         "description": "Name of the monitored host",
         "includeAll": false,
         "label": "Hostname",
@@ -4626,10 +5262,10 @@
         "options": [],
         "query": {
           "qryType": 1,
-          "query": "label_values({connector_id=~\"$system\"},host_name)",
+          "query": "label_values(system_uptime_seconds{os_type=~\"$system\"},host_name)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
-        "refresh": 2,
+        "refresh": 1,
         "regex": "",
         "sort": 1,
         "type": "query"
@@ -4682,8 +5318,8 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "Linux & Windows Performance (via Otel, MetricsHub)",
+  "title": "System Performance Metrics (MetricsHub)",
   "uid": "eWQoMUTIk",
-  "version": 554,
+  "version": 665,
   "weekStart": ""
 }

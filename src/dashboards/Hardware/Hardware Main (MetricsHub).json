@@ -27,7 +27,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "11.6.0"
+      "version": "12.0.2"
     },
     {
       "type": "panel",
@@ -173,7 +173,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.6.0",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
@@ -252,7 +252,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.6.0",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
@@ -324,7 +324,7 @@
         "textMode": "value",
         "wideLayout": true
       },
-      "pluginVersion": "11.6.0",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
@@ -333,7 +333,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "count(ALERTS_FOR_STATE{severity=\"critical\"})",
+          "expr": "count(ALERTS_FOR_STATE{severity=\"critical\", alertname=~\"MetricsHub-Hardware-.*\"})",
           "instant": true,
           "interval": "",
           "legendFormat": "Critical Alerts",
@@ -396,7 +396,7 @@
         "textMode": "value",
         "wideLayout": true
       },
-      "pluginVersion": "11.6.0",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
@@ -405,7 +405,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "count(ALERTS_FOR_STATE{severity=\"warn\"})",
+          "expr": "count(ALERTS_FOR_STATE{severity=\"warning\", alertname=~\"MetricsHub-Hardware-.*\"})",
           "instant": true,
           "interval": "",
           "legendFormat": "Warning Alerts",
@@ -467,10 +467,10 @@
                         "index": 1,
                         "text": "Critical"
                       },
-                      "warn": {
+                      "warning": {
                         "color": "orange",
                         "index": 0,
-                        "text": "Warn"
+                        "text": "Warning"
                       }
                     },
                     "type": "value"
@@ -554,15 +554,16 @@
           }
         ]
       },
-      "pluginVersion": "11.6.0",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
+          "editorMode": "code",
           "exemplar": false,
-          "expr": "ALERTS_FOR_STATE{site != \"\", host_name != \"\"}",
+          "expr": "ALERTS_FOR_STATE{site != \"\", host_name != \"\", alertname=~\"MetricsHub-Hardware-.*\"}",
           "format": "table",
           "instant": true,
           "interval": "",
@@ -738,7 +739,7 @@
         "content": "<a href=\"https://metricshub.com/\" target=\"_blank\">\n  <div style=\"\n    display: block;\n    margin: 0 auto; \n    \n    background: transparent url(https://metricshub.com/images/logo-darkgrey.svg) no-repeat center center;\n    background-size: contain;\n    \n    width: 150px;   \n    height: 125px;\n    border-radius: 3px;\n  \">\n  </div>\n</a>",
         "mode": "html"
       },
-      "pluginVersion": "11.6.0",
+      "pluginVersion": "12.0.2",
       "type": "text"
     },
     {
@@ -806,7 +807,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.6.0",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
@@ -915,7 +916,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.6.0",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
@@ -952,7 +953,7 @@
         "content": "<h3 style=\"background-color:DimGray\"><center>Live Data</center></h3>",
         "mode": "html"
       },
-      "pluginVersion": "11.6.0",
+      "pluginVersion": "12.0.2",
       "type": "text"
     },
     {
@@ -973,7 +974,7 @@
         "content": "<h3 style=\"background-color:DimGray\"><center>Cumulative Data</center></h3>",
         "mode": "html"
       },
-      "pluginVersion": "11.6.0",
+      "pluginVersion": "12.0.2",
       "type": "text"
     },
     {
@@ -1028,7 +1029,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.6.0",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
@@ -1101,7 +1102,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.6.0",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
@@ -1172,7 +1173,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.6.0",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
@@ -1242,7 +1243,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.6.0",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
@@ -1313,7 +1314,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.6.0",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
@@ -1384,7 +1385,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.6.0",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
@@ -1458,7 +1459,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.6.0",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
@@ -1529,7 +1530,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.6.0",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
@@ -1599,7 +1600,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.6.0",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
@@ -1679,7 +1680,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.6.0",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
@@ -1759,7 +1760,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.6.0",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
@@ -1835,7 +1836,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.6.0",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
@@ -1906,7 +1907,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.6.0",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
@@ -1976,7 +1977,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.6.0",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
@@ -2396,7 +2397,7 @@
           }
         ]
       },
-      "pluginVersion": "11.6.0",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
@@ -2464,7 +2465,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "count(count by (host_name) (present_over_time(metricshub_host_configured[1h])))",
+          "expr": "count(count by (host_name, site) (present_over_time(metricshub_host_configured[1h]))) by (site)",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -2479,7 +2480,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "(sum by (site) (avg_over_time(metricshub_host_configured[1d]))) / scalar(sum(avg_over_time(metricshub_host_configured[1d])))",
+          "expr": "sum(count by (host_name, site) (avg_over_time(metricshub_host_configured[1h]))) by (site)\r\n/\r\nscalar(sum(count by (host_name, site) (avg_over_time(metricshub_host_configured[1h]))))",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -2655,7 +2656,7 @@
         "xTickLabelRotation": -45,
         "xTickLabelSpacing": 0
       },
-      "pluginVersion": "11.6.0",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
@@ -2775,7 +2776,7 @@
         "xTickLabelRotation": -45,
         "xTickLabelSpacing": 0
       },
-      "pluginVersion": "11.6.0",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
@@ -2897,7 +2898,7 @@
         "xTickLabelRotation": -45,
         "xTickLabelSpacing": 0
       },
-      "pluginVersion": "11.6.0",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
@@ -3019,7 +3020,7 @@
         "sizing": "auto",
         "valueMode": "color"
       },
-      "pluginVersion": "11.6.0",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
@@ -3094,7 +3095,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.6.0",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
@@ -3183,7 +3184,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.6.0",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
@@ -3257,7 +3258,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.6.0",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
@@ -3331,7 +3332,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.6.0",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
@@ -3420,7 +3421,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.6.0",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
@@ -3559,7 +3560,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.6.0",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
@@ -3731,7 +3732,7 @@
         "xTickLabelRotation": -45,
         "xTickLabelSpacing": 0
       },
-      "pluginVersion": "11.6.0",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
@@ -3866,7 +3867,7 @@
         ]
       },
       "gridPos": {
-        "h": 5,
+        "h": 4,
         "w": 3,
         "x": 0,
         "y": 71
@@ -3893,7 +3894,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.6.0",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
@@ -4087,7 +4088,7 @@
         ]
       },
       "gridPos": {
-        "h": 5,
+        "h": 4,
         "w": 18,
         "x": 3,
         "y": 71
@@ -4112,7 +4113,7 @@
           }
         ]
       },
-      "pluginVersion": "11.6.0",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
@@ -4150,10 +4151,16 @@
           "options": {
             "alias": "Last Seen",
             "binary": {
-              "left": "Value",
+              "left": {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Value"
+                }
+              },
               "operator": "*",
-              "reducer": "sum",
-              "right": "1000"
+              "right": {
+                "fixed": "1000"
+              }
             },
             "mode": "binary",
             "reduce": {
@@ -4264,7 +4271,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 5,
+        "h": 4,
         "w": 3,
         "x": 21,
         "y": 71
@@ -4287,18 +4294,18 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.6.0",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
           "editorMode": "code",
           "expr": "",
           "legendFormat": "__auto",
           "range": true,
-          "refId": "A",
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          }
+          "refId": "A"
         }
       ],
       "title": "Dashboard Version",
@@ -4344,6 +4351,6 @@
   "timezone": "Europe/Paris",
   "title": "Hardware Main (MetricsHub)",
   "uid": "-GV2ChOnz",
-  "version": 16,
+  "version": 11,
   "weekStart": ""
 }
