@@ -4832,6 +4832,7 @@
     "liveNow": true,
     "preload": false,
     "tags": [
+      "MetricsHub",
       "System Overview"
     ],
     "timeSettings": {
