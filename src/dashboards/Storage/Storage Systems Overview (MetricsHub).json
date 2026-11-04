@@ -10546,6 +10546,7 @@
     "liveNow": false,
     "preload": false,
     "tags": [
+      "MetricsHub",
       "storage_systems_overview"
     ],
     "timeSettings": {

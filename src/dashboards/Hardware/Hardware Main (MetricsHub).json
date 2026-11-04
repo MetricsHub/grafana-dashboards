@@ -5561,6 +5561,7 @@
     "liveNow": false,
     "preload": false,
     "tags": [
+      "MetricsHub",
       "hw_main"
     ],
     "timeSettings": {
