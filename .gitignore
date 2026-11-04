@@ -3,3 +3,4 @@ target/
 .vscode
 .settings
 .project
+__pycache__/
