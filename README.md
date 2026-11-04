@@ -28,6 +28,28 @@ This dashboard shows the Red Hat OpenShift and OKD clusters monitored by the Met
 
   Otherwise, edit the hidden `console_domain` variable of the dashboard.
 
+# Tools
+
+## PromQL indentation
+
+`tools/promql_indent.py` indents the PromQL queries of the dashboards (v2 schema) so that they read well in the query editor. A sub-expression that fits in 100 columns stays on one line; otherwise it is split with a 2-space indentation. Only whitespace changes: a query is rewritten only when its tokens are unchanged, and the queries with comments are kept as written.
+
+It needs Python 3 and no other dependency:
+
+```bash
+# List the queries to indent (exit status 1 when there are some)
+python tools/promql_indent.py src/dashboards/*/*.json
+
+# Indent them
+python tools/promql_indent.py --write src/dashboards/*/*.json
+
+# Also check that Prometheus parses every indented query as the original one
+python tools/promql_indent.py --write --prometheus http://localhost:9090 src/dashboards/*/*.json
+
+# Checks of the tool
+python tools/test_promql_indent.py
+```
+
 # License
 
 The license is GNU Affero General Public License v3.0.
