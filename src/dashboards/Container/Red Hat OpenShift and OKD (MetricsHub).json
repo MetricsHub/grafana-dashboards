@@ -20229,7 +20229,7 @@
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
-                        "expr": "label_replace(k8s_hpa_pod_current{host_name=\"$cluster\", k8s_namespace_name=~\"$namespace\"} >= k8s_hpa_pod_max and k8s_hpa_pod_max > k8s_hpa_pod_min, \"issue\", \"At max\", \"\", \"\") or label_replace((k8s_hpa_pod_desired{host_name=\"$cluster\", k8s_namespace_name=~\"$namespace\"} != k8s_hpa_pod_current) and (k8s_hpa_pod_desired offset 10m != k8s_hpa_pod_current offset 10m), \"issue\", \"Scaling blocked > 10m\", \"\", \"\") or label_replace(k8s_hpa_pod_current{host_name=\"$cluster\", k8s_namespace_name=~\"$namespace\"} < k8s_hpa_pod_min, \"issue\", \"Below min\", \"\", \"\")",
+                        "expr": "label_replace(k8s_hpa_pod_current{host_name=\"$cluster\", k8s_namespace_name=~\"$namespace\"} >= k8s_hpa_pod_max and k8s_hpa_pod_max > k8s_hpa_pod_min, \"issue\", \"At max\", \"\", \"\") or label_replace(k8s_hpa_pod_desired{host_name=\"$cluster\", k8s_namespace_name=~\"$namespace\"} and (min_over_time((k8s_hpa_pod_desired{host_name=\"$cluster\", k8s_namespace_name=~\"$namespace\"} != bool k8s_hpa_pod_current)[10m:1m]) == 1) and k8s_hpa_pod_desired offset 10m, \"issue\", \"Scaling blocked > 10m\", \"\", \"\") or label_replace(k8s_hpa_pod_current{host_name=\"$cluster\", k8s_namespace_name=~\"$namespace\"} < k8s_hpa_pod_min, \"issue\", \"Below min\", \"\", \"\")",
                         "format": "table",
                         "instant": true,
                         "legendFormat": "__auto",
@@ -25354,7 +25354,7 @@
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
-                        "expr": "sum by (k8s_namespace_name) (max by (host_name, k8s_namespace_name, k8s_pod_name, k8s_pod_uid, k8s_container_name) (k8s_container_restart_count{host_name=\"$cluster\", k8s_namespace_name=~\"$namespace\"}) - max by (host_name, k8s_namespace_name, k8s_pod_name, k8s_pod_uid, k8s_container_name) (k8s_container_restart_count{host_name=\"$cluster\", k8s_namespace_name=~\"$namespace\"} offset $__interval)) > 0",
+                        "expr": "sum by (k8s_namespace_name) ((max by (host_name, k8s_namespace_name, k8s_pod_name, k8s_pod_uid, k8s_container_name) (k8s_container_restart_count{host_name=\"$cluster\", k8s_namespace_name=~\"$namespace\"}) - max by (host_name, k8s_namespace_name, k8s_pod_name, k8s_pod_uid, k8s_container_name) (k8s_container_restart_count{host_name=\"$cluster\", k8s_namespace_name=~\"$namespace\"} offset $__interval)) and on (host_name, k8s_pod_uid) k8s_pod_status_phase{host_name=\"$cluster\", k8s_node_name=~\"$node\"}) > 0",
                         "format": "time_series",
                         "instant": false,
                         "legendFormat": "{{k8s_namespace_name}}",
