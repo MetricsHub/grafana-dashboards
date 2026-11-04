@@ -30,12 +30,13 @@ TOKEN = re.compile(r'''
   | (?P<comment>\#[^\n]*)
   | (?P<op>==|!=|>=|<=|=~|!~|[-+*/%^<>=])
   | (?P<punct>[(){}\[\],@:])
-  | (?P<num>\d[\w.]*)
+  | (?P<num>(?:\d|\.\d)[\w.]*(?:(?<=[eE])[+-]\d+)?)
   | (?P<id>\$\{?\w+\}?|[A-Za-z_][\w:]*)
   | (?P<ws>\s+)
 ''', re.X)
 PRECEDENCE = {'or': 1, 'and': 2, 'unless': 2, '==': 3, '!=': 3, '>=': 3, '<=': 3, '>': 3, '<': 3,
-              '+': 4, '-': 4, '*': 5, '/': 5, '%': 5, '^': 6}
+              '+': 4, '-': 4, '*': 5, '/': 5, '%': 5, 'atan2': 5, '^': 6}
+KEYWORD_OPS = ('and', 'or', 'unless', 'atan2')
 MODIFIERS = ('bool', 'by', 'without', 'on', 'ignoring', 'group_left', 'group_right', 'offset')
 OPEN, CLOSE = '([{', ')]}'
 # Grafana variables that the PromQL parser cannot read outside strings, swapped for literals for --prometheus
@@ -109,7 +110,7 @@ class Formatter:
             if t.kind == 'punct' and t.text in OPEN:
                 k = self.match[k] + 1
                 continue
-            is_op = (t.kind == 'id' and t.text in ('and', 'or', 'unless')) or (t.kind == 'op' and t.text in PRECEDENCE)
+            is_op = (t.kind == 'id' and t.text in KEYWORD_OPS) or (t.kind == 'op' and t.text in PRECEDENCE)
             if is_op and k > i and self.operand_end(k - 1):
                 e = k + 1
                 if e < j and self.t[e].text == 'bool':
@@ -203,36 +204,56 @@ def indent(expr):
     return '\n'.join(line.rstrip() for line in f.fmt(0, len(f.t), 0))
 
 
+class ParseError(Exception):
+    """Prometheus could not parse the expression (HTTP 400 bad_data)."""
+
+
 def canonical(expr, prometheus):
+    """The canonical text of expr from the Prometheus formatter. Raises ParseError when Prometheus cannot parse it;
+    any other failure of the endpoint (unreachable, 401, 404, 500...) propagates."""
     out, last = [], 0
     for t in tokenize(expr):
         out.append(expr[last:t.start])
         out.append(SENTINELS.get(t.text, t.text) if t.kind == 'id' else t.text)
         last = t.end
     url = prometheus.rstrip('/') + '/api/v1/format_query?' + urllib.parse.urlencode({'query': ''.join(out)})
-    with urllib.request.urlopen(url, timeout=60) as r:
-        return json.load(r)['data']
+    try:
+        with urllib.request.urlopen(url, timeout=60) as r:
+            return json.load(r)['data']
+    except urllib.error.HTTPError as e:
+        if e.code == 400:
+            try:
+                bad_data = json.load(e).get('errorType') == 'bad_data'
+            except ValueError:
+                bad_data = False
+            if bad_data:
+                raise ParseError() from e
+        raise
 
 
 def checked(old, prometheus):
     """(indented expression, None), or (None, reason) when the expression is left as written: it has comments
-    (laid out by its author), or it cannot be proven to differ from the indented one by whitespace only."""
+    (laid out by its author), or it cannot be proven to differ from the indented one by whitespace only.
+    A failure of the Prometheus endpoint other than a parse error propagates."""
     try:
         if any(kind == 'comment' for kind, _ in tokens(old)):
             return None, 'comments'
         new = indent(old)
         if tokens(new) != tokens(old) or indent(new) != new:
             return None, 'unproven'
-        if prometheus:
-            try:
-                before = canonical(old, prometheus)
-            except urllib.error.HTTPError:
-                before = None  # Prometheus cannot parse it (other Grafana variables): the token check stands
-            if before is not None and canonical(new, prometheus) != before:
-                return None, 'unproven'
-        return new, None
-    except (ValueError, KeyError, OSError):
+    except (ValueError, KeyError, IndexError):
         return None, 'unproven'
+    if prometheus:
+        try:
+            before = canonical(old, prometheus)
+        except ParseError:
+            return new, None  # Prometheus cannot parse the original (other Grafana variables): the token check stands
+        try:
+            if canonical(new, prometheus) != before:
+                return None, 'unproven'
+        except ParseError:
+            return None, 'unproven'
+    return new, None
 
 
 def queries(dashboard):
@@ -251,6 +272,12 @@ def main():
     p.add_argument('--write', action='store_true', help='rewrite the files')
     p.add_argument('--prometheus', help='Prometheus URL: also check the canonical form of every expression')
     a = p.parse_args()
+    if a.prometheus:
+        try:
+            canonical('1', a.prometheus)
+        except Exception as e:
+            print('error: the Prometheus formatter at %s does not answer: %s' % (a.prometheus, e))
+            return 2
     status = 0
     for path in a.files:
         with open(path, encoding='utf-8') as f:
@@ -262,7 +289,11 @@ def main():
         total, todo, left = 0, 0, {'comments': [], 'unproven': []}
         for name, ref, spec in queries(d):
             total += 1
-            new, reason = checked(spec['expr'], a.prometheus)
+            try:
+                new, reason = checked(spec['expr'], a.prometheus)
+            except OSError as e:
+                print('error: %s not changed, the Prometheus check failed on %s %s: %s' % (path, name, ref, e))
+                return 2
             if reason:
                 left[reason].append('%s %s' % (name, ref))
             elif new != spec['expr']:
