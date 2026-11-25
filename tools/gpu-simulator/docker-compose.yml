@@ -1,0 +1,118 @@
+# Twelve GPU servers, one container each, for a MetricsHub agent to poll alongside the real
+# servers. Each publishes its own port on the Docker host, so one agent reaches them all.
+#
+#   docker compose up -d --build
+#   curl -s localhost:9401/metrics | head
+#
+# Each container reports its own host.name, taken from the exporter's Hostname label, and that
+# name also derives its GPU UUIDs, so no two containers report the same card. --seed only shifts
+# the load cycle, which keeps the fleet from idling and peaking in step.
+
+name: gpu-fleet
+
+x-sim: &sim
+  build: .
+  image: metricshub/fake-dcgm-exporter:latest
+  restart: unless-stopped
+  read_only: true
+  security_opt: [no-new-privileges:true]
+  cap_drop: [ALL]
+
+services:
+  # 8 x NVIDIA H100 80GB HBM3
+  dev-nvidia-02:
+    <<: *sim
+    container_name: dev-nvidia-02
+    ports: ["9401:9400"]
+    command: ["--host-name", "dev-nvidia-02", "--gen", "h100", "--gpus", "8",
+              "--profile", "training", "--seed", "1"]
+
+  # 8 x NVIDIA H100 80GB HBM3
+  dev-nvidia-03:
+    <<: *sim
+    container_name: dev-nvidia-03
+    ports: ["9402:9400"]
+    command: ["--host-name", "dev-nvidia-03", "--gen", "h100", "--gpus", "8",
+              "--profile", "training", "--seed", "2"]
+
+  # 8 x NVIDIA H100 80GB HBM3
+  dev-nvidia-04:
+    <<: *sim
+    container_name: dev-nvidia-04
+    ports: ["9403:9400"]
+    command: ["--host-name", "dev-nvidia-04", "--gen", "h100", "--gpus", "8",
+              "--profile", "training", "--seed", "3", "--fault", "2=thermal"]
+
+  # 8 x NVIDIA H100 80GB HBM3
+  dev-nvidia-05:
+    <<: *sim
+    container_name: dev-nvidia-05
+    ports: ["9404:9400"]
+    command: ["--host-name", "dev-nvidia-05", "--gen", "h100", "--gpus", "8",
+              "--profile", "bursty", "--seed", "4"]
+
+  # 8 x NVIDIA H200
+  dev-nvidia-06:
+    <<: *sim
+    container_name: dev-nvidia-06
+    ports: ["9405:9400"]
+    command: ["--host-name", "dev-nvidia-06", "--gen", "h200", "--gpus", "8",
+              "--profile", "training", "--seed", "5", "--fault", "3=lost"]
+
+  # 8 x NVIDIA H200
+  dev-nvidia-07:
+    <<: *sim
+    container_name: dev-nvidia-07
+    ports: ["9406:9400"]
+    command: ["--host-name", "dev-nvidia-07", "--gen", "h200", "--gpus", "8",
+              "--profile", "training", "--seed", "6"]
+
+  # 8 x NVIDIA B200
+  dev-nvidia-08:
+    <<: *sim
+    container_name: dev-nvidia-08
+    ports: ["9407:9400"]
+    command: ["--host-name", "dev-nvidia-08", "--gen", "b200", "--gpus", "8",
+              "--profile", "bursty", "--seed", "7", "--fault", "5=fabric",
+              "--down-link", "nvswitch1:2"]
+
+  # 8 x NVIDIA A100-SXM4-80GB
+  dev-nvidia-09:
+    <<: *sim
+    container_name: dev-nvidia-09
+    ports: ["9408:9400"]
+    command: ["--host-name", "dev-nvidia-09", "--gen", "a100", "--gpus", "8",
+              "--profile", "training", "--seed", "8", "--mig"]
+
+  # 8 x NVIDIA A100-SXM4-80GB
+  dev-nvidia-10:
+    <<: *sim
+    container_name: dev-nvidia-10
+    ports: ["9409:9400"]
+    command: ["--host-name", "dev-nvidia-10", "--gen", "a100", "--gpus", "8",
+              "--profile", "training", "--seed", "9", "--fault", "0=ecc"]
+
+  # 8 x NVIDIA A100-SXM4-80GB
+  dev-nvidia-11:
+    <<: *sim
+    container_name: dev-nvidia-11
+    ports: ["9410:9400"]
+    command: ["--host-name", "dev-nvidia-11", "--gen", "a100", "--gpus", "8",
+              "--profile", "bursty", "--seed", "10", "--mig"]
+
+  # 8 x NVIDIA A100-SXM4-80GB
+  dev-nvidia-12:
+    <<: *sim
+    container_name: dev-nvidia-12
+    ports: ["9411:9400"]
+    command: ["--host-name", "dev-nvidia-12", "--gen", "a100", "--gpus", "8",
+              "--profile", "training", "--seed", "11", "--fault", "5=xid"]
+
+  # 8 x NVIDIA L40S
+  dev-nvidia-13:
+    <<: *sim
+    container_name: dev-nvidia-13
+    ports: ["9412:9400"]
+    command: ["--host-name", "dev-nvidia-13", "--gen", "l40s", "--gpus", "8",
+              "--profile", "idle", "--seed", "12"]
+

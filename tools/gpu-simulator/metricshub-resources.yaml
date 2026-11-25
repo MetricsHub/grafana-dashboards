@@ -1,0 +1,170 @@
+# Resources for the MetricsHub agent that already polls the other servers.
+#
+# Paste them at the end of an existing resource group's `resources:` list, at the indentation its
+# other resources use, so the servers share that group's site with the others. The agent watches
+# its config directory and reloads differentially, so nothing else is rescheduled and no restart
+# is needed.
+#
+# The host names are examples. Change them here, in fake-dcgm-exporter.py and in
+# docker-compose.yml so they follow the naming of the other servers.
+#
+# Each resource polls localhost. To give each one its own hostname instead, map the names to the
+# loopback on the agent host and set each `hostname` to the resource's name. On Windows, as
+# administrator:
+#
+#   $h = "$env:WINDIR\System32\drivers\etc\hosts"
+#   @("dev-nvidia-02", "dev-nvidia-03", "dev-nvidia-04", "dev-nvidia-05", "dev-nvidia-06", "dev-nvidia-07", "dev-nvidia-08", "dev-nvidia-09", "dev-nvidia-10", "dev-nvidia-11", "dev-nvidia-12", "dev-nvidia-13") | ForEach-Object { Add-Content $h "127.0.0.1  $_" }
+#
+# Start the fleet with an explicit port, because --fleet counts up from 9400 by default:
+#
+#   python fake-dcgm-exporter.py --fleet --port 9401
+#
+# The agent needs the NvidiaDCGMExporter connector. The GPU temperature limits, the seven DCGM
+# health checks, the recovery action and the memory health metrics come with a later version of
+# the connector. An earlier one produces everything else.
+
+#GPU compute
+
+      dev-nvidia-02:
+        attributes:
+          host.name: dev-nvidia-02
+          host.type: linux
+        protocols:
+          http:
+            hostname: localhost
+            https: false
+            port: 9401
+            timeout: 30
+        connectors: [ +NvidiaDCGMExporter ]
+
+      dev-nvidia-03:
+        attributes:
+          host.name: dev-nvidia-03
+          host.type: linux
+        protocols:
+          http:
+            hostname: localhost
+            https: false
+            port: 9402
+            timeout: 30
+        connectors: [ +NvidiaDCGMExporter ]
+
+      dev-nvidia-04:
+        attributes:
+          host.name: dev-nvidia-04
+          host.type: linux
+        protocols:
+          http:
+            hostname: localhost
+            https: false
+            port: 9403
+            timeout: 30
+        connectors: [ +NvidiaDCGMExporter ]
+
+      dev-nvidia-05:
+        attributes:
+          host.name: dev-nvidia-05
+          host.type: linux
+        protocols:
+          http:
+            hostname: localhost
+            https: false
+            port: 9404
+            timeout: 30
+        connectors: [ +NvidiaDCGMExporter ]
+
+      dev-nvidia-06:
+        attributes:
+          host.name: dev-nvidia-06
+          host.type: linux
+        protocols:
+          http:
+            hostname: localhost
+            https: false
+            port: 9405
+            timeout: 30
+        connectors: [ +NvidiaDCGMExporter ]
+
+      dev-nvidia-07:
+        attributes:
+          host.name: dev-nvidia-07
+          host.type: linux
+        protocols:
+          http:
+            hostname: localhost
+            https: false
+            port: 9406
+            timeout: 30
+        connectors: [ +NvidiaDCGMExporter ]
+
+      dev-nvidia-08:
+        attributes:
+          host.name: dev-nvidia-08
+          host.type: linux
+        protocols:
+          http:
+            hostname: localhost
+            https: false
+            port: 9407
+            timeout: 30
+        connectors: [ +NvidiaDCGMExporter ]
+
+      dev-nvidia-09:
+        attributes:
+          host.name: dev-nvidia-09
+          host.type: linux
+        protocols:
+          http:
+            hostname: localhost
+            https: false
+            port: 9408
+            timeout: 30
+        connectors: [ +NvidiaDCGMExporter ]
+
+      dev-nvidia-10:
+        attributes:
+          host.name: dev-nvidia-10
+          host.type: linux
+        protocols:
+          http:
+            hostname: localhost
+            https: false
+            port: 9409
+            timeout: 30
+        connectors: [ +NvidiaDCGMExporter ]
+
+      dev-nvidia-11:
+        attributes:
+          host.name: dev-nvidia-11
+          host.type: linux
+        protocols:
+          http:
+            hostname: localhost
+            https: false
+            port: 9410
+            timeout: 30
+        connectors: [ +NvidiaDCGMExporter ]
+
+      dev-nvidia-12:
+        attributes:
+          host.name: dev-nvidia-12
+          host.type: linux
+        protocols:
+          http:
+            hostname: localhost
+            https: false
+            port: 9411
+            timeout: 30
+        connectors: [ +NvidiaDCGMExporter ]
+
+      dev-nvidia-13:
+        attributes:
+          host.name: dev-nvidia-13
+          host.type: linux
+        protocols:
+          http:
+            hostname: localhost
+            https: false
+            port: 9412
+            timeout: 30
+        connectors: [ +NvidiaDCGMExporter ]
